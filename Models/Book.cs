@@ -24,5 +24,7 @@ namespace Nile.Models
         public string Category { get; set; }
         [Required]
         public double Price { get; set; } // format as currency
+        public int NumPages { get; set; }
+
     }
 }

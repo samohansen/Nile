@@ -9,7 +9,7 @@ using Nile.Models;
 namespace Nile.Migrations
 {
     [DbContext(typeof(NileDbContext))]
-    [Migration("20210218044116_Initial")]
+    [Migration("20210225004118_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,9 @@ namespace Nile.Migrations
                     b.Property<string>("ISBN")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumPages")
+                        .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

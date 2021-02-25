@@ -56,12 +56,18 @@ namespace Nile
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            endpoints.MapControllerRoute(
+                "pagination",
+                "P/{page}",
+                new { Controller = "Home", action = "Index" });
+
+            endpoints.MapDefaultControllerRoute();
+                    //name: "default",
+                    //pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //SeedData.EnsurePopulated(app);
+            // use the line below to make sure the database is populated w/ Seed Data:
+            SeedData.EnsurePopulated(app);
         }
     }
 }
