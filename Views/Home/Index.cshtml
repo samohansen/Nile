@@ -15,17 +15,6 @@
 </div>
 <br />
 
-<!--
-    Use at least three new Bootstrap
-    commands that you have never used before that are different from those used in Chapter 7.
-    (#notcoveredinthevideos #notmeanttobedifficult – List the commands you used in the comments
-    when you submit the program.)
-
-    ADDITIONAL BOOTSTRAP COMMANDS USED:
-    - <h5> tag (div on top of page): 
-    - <div> tag: w-75
-    - <h5> tag (div inside the for loop): bg-dark text-warning
--->
 <div>
     @foreach (var x in Model.Books)
     {
@@ -44,7 +33,8 @@
 
     <div page-model="@Model.PagingInfo" page-action="Index"
          page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark"
-         page-class-selected="btn-primary" class="btn-group pull-right m-1">
+         page-class-selected="btn-warning" page-url-category="@Model.Category"
+         class="btn-group pull-right m-1">
 
     </div>
 </div>

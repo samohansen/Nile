@@ -56,7 +56,23 @@ namespace Nile
 
             app.UseEndpoints(endpoints =>
             {
-            endpoints.MapControllerRoute(
+                // endpoint 1: type in category name & a page number
+                endpoints.MapControllerRoute("catpage",
+                    "{category}/{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                // endpoint 2: type in a page only
+                endpoints.MapControllerRoute("page",
+                    "{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                // endpoint 3: type in a category only
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index", page = 1 }); // page = 1 sets default to page 1
+
+
+                endpoints.MapControllerRoute(
                 "pagination",
                 "P/{page}",
                 new { Controller = "Home", action = "Index" });
