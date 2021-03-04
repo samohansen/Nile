@@ -15,7 +15,7 @@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <!--<img src="~/nile logo.png" width="50" class="rounded" alt="nile logo" />
                         <img src="~/nile_logo.png" width="150" class="rounded" alt="nile logo" />-->
-                    <img src="~/nile_logo_gray.png" height="50" class="rounded" alt="nile logo"  />
+                    <img src="~/nile_logo_gray.png" height="50" class="rounded" alt="nile logo" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -34,11 +34,18 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container row">
+        <main role="main" class="pb-3 col-8">
             @RenderBody()
         </main>
+        <div class="col-4">
+            <br /><br /><br />
+            <br /><br /><br />
+            <h4>Filter by Category</h4>
+        </div>
     </div>
+
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
