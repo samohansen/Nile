@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nile.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Nile
 {
@@ -38,6 +39,10 @@ namespace Nile
             // Enable "sessions to be stored in cache: 
             services.AddDistributedMemoryCache();
             services.AddSession();
+            
+            // freeman ch. 9 -- storage aware cart
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

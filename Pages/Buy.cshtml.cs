@@ -13,9 +13,10 @@ namespace Nile.Pages
     {
         private IBookRepository repository;
 
-        public BuyModel(IBookRepository repo)
+        public BuyModel(IBookRepository repo, Cart cartService)
         {
             repository = repo;
+            Cart = cartService;
         }
 
         public Cart Cart { get; set; }
@@ -24,23 +25,24 @@ namespace Nile.Pages
         public void OnGet(string returnUrl)
         {
             ReturnUrl = returnUrl ?? "/";
-            Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            //Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
 
         // Post
         public IActionResult OnPost(long bookId, string returnUrl)
         {
-            Book book = repository.Books.FirstOrDefault(b => b.BookId == bookId);
-            Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            Book book = repository.Books
+                .FirstOrDefault(b => b.BookId == bookId);
+            //Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             Cart.AddItem(book, 1); 
-            HttpContext.Session.SetJson("cart", Cart);
+            //HttpContext.Session.SetJson("cart", Cart);
             return RedirectToPage(new { returnUrl = returnUrl });
         }
 
         // Remove Post
         public IActionResult OnPostRemove(long bookId, string returnUrl)
         {
-            Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            //Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             Cart.RemoveLine(Cart.Lines.First(cl =>
                 cl.Book.BookId == bookId).Book);
             HttpContext.Session.SetJson("cart", Cart);
@@ -49,7 +51,4 @@ namespace Nile.Pages
 
     }
 
-    // from Teams: 
-    //commenting out Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart(); 
-    //in both my OnPost and OnPostRemove methods in the.cshtml.cs file and that got mine to work.
 }

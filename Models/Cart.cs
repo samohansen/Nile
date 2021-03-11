@@ -9,7 +9,7 @@ namespace Nile.Models
     {
         public List<CartLine> Lines { get; set; } = new List<CartLine>();
 
-        public void AddItem(Book bk, int qty)
+        public virtual void AddItem(Book bk, int qty)
         {
             CartLine line = Lines
                 .Where(b => b.Book.BookId == bk.BookId)
@@ -29,11 +29,11 @@ namespace Nile.Models
         }
 
         // part 2 BuildCartModel
-        public void RemoveLine(Book bk) =>
+        public virtual void RemoveLine(Book bk) =>
             Lines.RemoveAll(x => x.Book.BookId == bk.BookId);
 
         // Empty (clear) the cart
-        public void Clear() => Lines.Clear();
+        public virtual void Clear() => Lines.Clear();
 
         // calculate the cart total
         public double ComputeTotalSum()
