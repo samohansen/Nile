@@ -28,7 +28,7 @@ namespace Nile
             services.AddControllersWithViews();
             services.AddDbContext<NileDbContext>(options =>
            {
-               options.UseSqlServer(Configuration["ConnectionStrings:NileConnection"]);
+               options.UseSqlite(Configuration["ConnectionStrings:NileConnection"]);
            });
 
             services.AddScoped<IBookRepository, EFBookRepository>();
