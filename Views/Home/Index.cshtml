@@ -18,17 +18,7 @@
 <div>
     @foreach (var x in Model.Books)
     {
-        <div class="list-group justify-content-sm-center">
-            <h5 class="list-group-item bg-dark text-warning">@x.Title</h5>
-            <p class="list-group-item"><b>Author:</b> @x.Author</p>
-            <p class="list-group-item"><b>Publisher:</b> @x.Publisher</p>
-            <p class="list-group-item"><b>ISBN:</b> @x.ISBN</p>
-            <p class="list-group-item"><b>Classification:</b> @x.Classification</p>
-            <p class="list-group-item"><b>Category:</b> @x.Category</p>
-            <p class="list-group-item"><b>Price:</b> $@x.Price</p>
-            <p class="list-group-item"><b># Pages:</b> @x.NumPages</p>
-            <br /><br />
-        </div>
+    <partial name="BookSummary" model="x" />
     }
 
     <div page-model="@Model.PagingInfo" page-action="Index"

@@ -1,0 +1,26 @@
+﻿@model Book
+
+<div class="list-group justify-content-sm-center">
+    <h5 class="list-group-item bg-dark text-warning">
+        @Model.Title
+        
+    </h5>
+    <p class="list-group-item"><b>Author:</b> @Model.Author</p>
+    <p class="list-group-item"><b>Publisher:</b> @Model.Publisher</p>
+    <p class="list-group-item"><b>ISBN:</b> @Model.ISBN</p>
+    <p class="list-group-item"><b>Classification:</b> @Model.Classification</p>
+    <p class="list-group-item"><b>Category:</b> @Model.Category</p>
+    <p class="list-group-item"><b>Price:</b> $@Model.Price</p>
+    <p class="list-group-item"><b># Pages:</b> @Model.NumPages</p>
+    <form class="list-group-item " id="@Model.BookId" asp-page="/Buy" method="post">
+        <input type="hidden" asp-for="BookId" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <span class="card-text p-1">
+            <button type="submit" class="btn btn-warning btn-md align-items-center">
+                Buy
+            </button>
+        </span>
+    </form>
+    <br /><br />
+</div>
+

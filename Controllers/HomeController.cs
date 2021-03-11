@@ -25,20 +25,20 @@ namespace Nile.Controllers
         }
 
         // Assignment 7: pass category
-        public IActionResult Index(string category, int page = 1)
+        public IActionResult Index(string category, int pageNum = 1)
         {
             return View(new BookListViewModel
             {
                 Books = _repository.Books
                     .Where(b => category == null || b.Category == category) // Type was project type -- here we want book category?
                     .OrderBy(b => b.BookId)
-                    .Skip((page - 1) * PageSize)
+                    .Skip((pageNum - 1) * PageSize)
                     .Take(PageSize)
 
                 ,
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = page,
+                    CurrentPage = pageNum,
                     ItemsPerPage = PageSize,
 
                     // if there is a filter applied, only count the items left after filtering

@@ -30,8 +30,14 @@ namespace Nile
            {
                options.UseSqlite(Configuration["ConnectionStrings:NileConnection"]);
            });
-
+            
             services.AddScoped<IBookRepository, EFBookRepository>();
+
+            services.AddRazorPages();
+
+            // Enable "sessions to be stored in cache: 
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +56,8 @@ namespace Nile
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -58,29 +66,35 @@ namespace Nile
             {
                 // endpoint 1: type in category name & a page number
                 endpoints.MapControllerRoute("catpage",
-                    "{category}/{page:int}",
+                    "{category}/{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 // endpoint 2: type in a page only
                 endpoints.MapControllerRoute("page",
-                    "{page:int}",
+                    "{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 // endpoint 3: type in a category only
                 endpoints.MapControllerRoute("category",
                     "{category}",
-                    new { Controller = "Home", action = "Index", page = 1 }); // page = 1 sets default to page 1
+                    new { Controller = "Home", action = "Index", pageNum = 1 }); // page = 1 sets default to page 1
 
 
                 endpoints.MapControllerRoute(
                 "pagination",
-                "P/{page}",
+                "P/{pageNum}",
                 new { Controller = "Home", action = "Index" });
 
-            endpoints.MapDefaultControllerRoute();
-                    //name: "default",
-                    //pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
+                //name: "default",
+                //pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                // Razor Page endpoints
+                endpoints.MapRazorPages();
+
             });
+
+            
 
             // use the line below to make sure the database is populated w/ Seed Data:
             SeedData.EnsurePopulated(app);
